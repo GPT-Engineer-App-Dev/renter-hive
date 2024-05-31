@@ -11,6 +11,7 @@ const Index = () => {
   });
 
   const [searchResults, setSearchResults] = useState([]);
+  const [bookingConfirmation, setBookingConfirmation] = useState("");
 
   const handleSearch = () => {
     // Mock data for listings
@@ -32,8 +33,18 @@ const Index = () => {
     setSearchResults(results);
   };
 
+  const handleBooking = (property) => {
+    // Simulate booking process
+    setBookingConfirmation(`You have successfully booked ${property.title} for $${property.price} per month.`);
+  };
+
   return (
     <Box>
+      {bookingConfirmation && (
+        <Box bg="green.100" p={4} mb={4} borderRadius="md" textAlign="center">
+          <Text fontSize="lg" color="green.800">{bookingConfirmation}</Text>
+        </Box>
+      )}
       {/* Navigation Bar */}
       <Box as="nav" bg="blue.700" color="white" py={4}>
         <Container maxW="container.xl" display="flex" justifyContent="space-between" alignItems="center">
@@ -75,6 +86,7 @@ const Index = () => {
                     <Heading as="h3" size="md" mb={2}>{result.title}</Heading>
                     <Text fontSize="sm" color="gray.600">{result.beds} Beds • {result.baths} Baths • {result.sqft} sqft</Text>
                     <Text mt={4} fontSize="lg" fontWeight="bold">${result.price} / month</Text>
+                    <Button colorScheme="green" mt={4} onClick={() => handleBooking(result)}>Book Now</Button>
                   </Box>
                 </Box>
               ))}
@@ -96,6 +108,7 @@ const Index = () => {
                 <Heading as="h3" size="md" mb={2}>Beautiful Family House</Heading>
                 <Text fontSize="sm" color="gray.600">3 Beds • 2 Baths • 1,800 sqft</Text>
                 <Text mt={4} fontSize="lg" fontWeight="bold">$2,500 / month</Text>
+                <Button colorScheme="green" mt={4} onClick={() => handleBooking({ title: "Beautiful Family House", price: 2500 })}>Book Now</Button>
               </Box>
             </Box>
             <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -104,6 +117,7 @@ const Index = () => {
                 <Heading as="h3" size="md" mb={2}>Modern Apartment</Heading>
                 <Text fontSize="sm" color="gray.600">2 Beds • 1 Bath • 1,200 sqft</Text>
                 <Text mt={4} fontSize="lg" fontWeight="bold">$1,800 / month</Text>
+                <Button colorScheme="green" mt={4} onClick={() => handleBooking({ title: "Modern Apartment", price: 1800 })}>Book Now</Button>
               </Box>
             </Box>
             <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -112,6 +126,7 @@ const Index = () => {
                 <Heading as="h3" size="md" mb={2}>Cozy Studio</Heading>
                 <Text fontSize="sm" color="gray.600">1 Bed • 1 Bath • 600 sqft</Text>
                 <Text mt={4} fontSize="lg" fontWeight="bold">$1,200 / month</Text>
+                <Button colorScheme="green" mt={4} onClick={() => handleBooking({ title: "Cozy Studio", price: 1200 })}>Book Now</Button>
               </Box>
             </Box>
           </SimpleGrid>
